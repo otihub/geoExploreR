@@ -14,7 +14,7 @@ shinyUI(
                 skin = 'green',
                 
                 
-                dashboardHeader(title = HTML(paste(icon('globe'),'geoExploreR'))
+                dashboardHeader(title = HTML(paste(icon('globe'),'Diffa Perception Survey'))
                                 
                                 # a(icon('github fa-2x'),href='https://github.com/davesteps/homebrewR'),
                                 # a(icon('twitter fa-2x'),href='https://twitter.com/davesteps')
@@ -23,7 +23,7 @@ shinyUI(
                 dashboardSidebar(
                   
                   selectInput('dataset',label = 'Dataset',
-                              choices = c('Quakes','Meuse','Jura','Fulmar')),
+                              choices = c('Round 1','Quakes','Meuse','Jura','Fulmar')),
                   #                     selectInput('xvar',label='x Var',choices = names(meuse@data),selected =  names(meuse@data)[1]),
                   #                     selectInput('yvar',label='y Var',choices = names(meuse@data),selected = names(meuse@data)[2]),
                   #                     selectInput('color',label='Color Var',choices = names(meuse@data),selected =  names(meuse@data)[1]),
@@ -42,15 +42,15 @@ shinyUI(
                     draggable = F,
                     width='100%',
                     height='auto',
-                    p(a(icon('github fa-2x'),href='https://github.com/davesteps/geoExploreR',target='_blank')),
+                #    p(a(icon('github fa-2x'),href='https://github.com/davesteps/geoExploreR',target='_blank')),
                     HTML("<div style='float:center'>
-                  <a href='https://twitter.com/share' 
-                                                       class='twitter-share-button' 
-                                                       align='middle' 
-                                                       data-url='davesteps.com/geoExploreR/' 
-                                                       data-text='created by @davesteps using #rstats and #shiny: davesteps.com/geoExploreR/' 
-                                                       data-size='large'>Tweet
-                                                       </a>
+                 # <a href='https://twitter.com/share' 
+                                                    #  class='twitter-share-button' 
+                                                    #  align='middle' 
+                                                    #   data-url='davesteps.com/geoExploreR/' 
+                                                    #   data-text='created by @davesteps using #rstats and #shiny: davesteps.com/geoExploreR/' 
+                                                    #   data-size='large'>Tweet
+                                                    #   </a>
                                                        <script>!function(d,s,id){
                                                        var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
                                                        if(!d.getElementById(id)){

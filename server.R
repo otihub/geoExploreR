@@ -50,9 +50,9 @@ function(input, output,session) {
   })
   
   
-  output$xvar <- renderUI(selectInput('xvar',label='x Var',choices = names(df),selected =  names(df)[1]))
-  output$yvar <- renderUI(selectInput('yvar',label='y Var',choices = names(df),selected = names(df)[2]))
-  output$cvar <- renderUI(selectInput('color',label='Color Var',choices = names(df),selected =  names(df)[1]))
+  output$xvar <- renderUI(selectInput('xvar',label='x Var',choices = columns, selected =  columns[1]))
+  output$yvar <- renderUI(selectInput('yvar',label='y Var',choices = columns, selected =  columns[2]))
+  output$cvar <- renderUI(selectInput('color',label='Color',choices = columns, selected =  columns[1]))
   
   xvar_ <- ''
   xVar <- reactive({
