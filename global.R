@@ -9,6 +9,7 @@ require(raster)
 require(gstat)
 require(rgdal)
 require(Cairo)
+library(formattable)
 
 
 data(meuse)

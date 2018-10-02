@@ -23,7 +23,7 @@ shinyUI(
                 dashboardSidebar(
                   
                   selectInput('dataset',label = 'Dataset',
-                              choices = c('Round 1','Quakes','Meuse','Jura','Fulmar')),
+                              choices = c('Round 1')),
                   #                     selectInput('xvar',label='x Var',choices = names(meuse@data),selected =  names(meuse@data)[1]),
                   #                     selectInput('yvar',label='y Var',choices = names(meuse@data),selected = names(meuse@data)[2]),
                   #                     selectInput('color',label='Color Var',choices = names(meuse@data),selected =  names(meuse@data)[1]),
@@ -41,27 +41,9 @@ shinyUI(
                     left = 10,
                     draggable = F,
                     width='100%',
-                    height='auto',
-                #    p(a(icon('github fa-2x'),href='https://github.com/davesteps/geoExploreR',target='_blank')),
-                    HTML("<div style='float:center'>
-                 # <a href='https://twitter.com/share' 
-                                                    #  class='twitter-share-button' 
-                                                    #  align='middle' 
-                                                    #   data-url='davesteps.com/geoExploreR/' 
-                                                    #   data-text='created by @davesteps using #rstats and #shiny: davesteps.com/geoExploreR/' 
-                                                    #   data-size='large'>Tweet
-                                                    #   </a>
-                                                       <script>!function(d,s,id){
-                                                       var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-                                                       if(!d.getElementById(id)){
-                                                       js=d.createElement(s);
-                                                       js.id=id;
-                                                       js.src=p+'://platform.twitter.com/widgets.js';
-                                                       fjs.parentNode.insertBefore(js,fjs);
-                                                       }
-                                                       }(document, 'script', 'twitter-wjs');
-                                                       </script>
-                                                       </div>")
+                    height='auto' ,
+                 #   p(a(icon('github fa-2x'),href='https://github.com/davesteps/geoExploreR',target='_blank')),
+                   HTML("<div style='float:center'>")
                     
                     # a(icon('github fa-2x'),href='https://github.com/davesteps/geoExploreR',target='_blank')
                     # a(icon('twitter fa-2x'),href='https://twitter.com/davesteps',target='_blank')
@@ -92,21 +74,22 @@ shinyUI(
                   #                             ),
                   #                             
                   box(width = 6,status = 'warning',
-                      div(style = "height: 450px;",
+                      div(style = "height: 400px;",
                           ggvisOutput("p")),
+                      paste("Distribution"),
                       fluidRow(
                         column(width=6,
-                               div(style = "height: 200px;",
+                               div(style = "height: 175px;",
                                    ggvisOutput("p2"))),
                         column(width=6,
-                               div(style = "height: 200px;",
+                               div(style = "height: 175px;",
                                    ggvisOutput("p3")))
                       )
                       
                   ),                  
                   
                   box(width = 6,status = 'warning',
-                      leafletOutput("map",height = 650)
+                      leafletOutput("map",height = 600)
                   )
                   
                   
