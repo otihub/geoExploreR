@@ -9,24 +9,25 @@ require(raster)
 require(gstat)
 require(rgdal)
 require(Cairo)
+library(formattable)
 
 
-data(meuse)
-coordinates(meuse) = ~x+y
-proj4string(meuse) <- CRS("+init=epsg:28992")
-meuse <- spTransform(meuse, CRSobj = CRS("+proj=longlat +datum=WGS84 +no_defs"))
+#data(meuse)
+#coordinates(meuse) = ~x+y
+#proj4string(meuse) <- CRS("+init=epsg:28992")
+#meuse <- spTransform(meuse, CRSobj = CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
-data("quakes")
-names(quakes)[1:2] <- c('y','x')
-coordinates(quakes) <- ~x+y
+#data("quakes")
+#names(quakes)[1:2] <- c('y','x')
+#coordinates(quakes) <- ~x+y
 
-data('jura')
-jura <-jura.val[,c(3,4,7:13,5,6)]
-names(jura)[1:2] <- c('x','y')
-coordinates(jura) <- ~x+y
+#data('jura')
+#jura <-jura.val[,c(3,4,7:13,5,6)]
+#names(jura)[1:2] <- c('x','y')
+#coordinates(jura) <- ~x+y
 
 #Test$Date<-as.Date(Test$Date)
-difr1<-read.csv(file='nermerge4.csv',sep = ',')
+difr1<-read.csv(file='diffa_r1.csv',sep = ',')
 #test4<-test4[2:5]
 #test4$Date<-as.yearmon(test4$Date)
 #test4$Date<-as.Date(test4$Date)
@@ -36,16 +37,16 @@ difr1[is.na(difr1)]<-0
 
 coordinates(difr1) <- ~x+y
 
-data(fulmar)
-coordinates(fulmar) <- ~x+y
-proj4string(fulmar) <- CRS("+init=epsg:32631")
-fulmar <- spTransform(fulmar, CRSobj = CRS("+proj=longlat +datum=WGS84 +no_defs"))
+#data(fulmar)
+#coordinates(fulmar) <- ~x+y
+#proj4string(fulmar) <- CRS("+init=epsg:32631")
+#fulmar <- spTransform(fulmar, CRSobj = CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
 datasets <- list(
-  'Meuse'=meuse,
-  'Quakes'=quakes,
-  'Jura'=jura,
-  'Fulmar'=fulmar,
+#  'Meuse'=meuse,
+#  'Quakes'=quakes,
+#  'Jura'=jura,
+#  'Fulmar'=fulmar,
   'Round 1'=difr1
 )
 

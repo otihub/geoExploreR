@@ -27,7 +27,7 @@ function(input, output,session) {
   
   
   
-  df <- datasets[['Quakes']]
+  df <- datasets[['Round 1']]
   makeReactiveBinding('df')
   
   observeEvent(input$dataset,{
@@ -50,9 +50,10 @@ function(input, output,session) {
   })
   
   
-  output$xvar <- renderUI(selectInput('xvar',label='x Var',choices = columns, selected =  columns[1]))
-  output$yvar <- renderUI(selectInput('yvar',label='y Var',choices = columns, selected =  columns[2]))
-  output$cvar <- renderUI(selectInput('color',label='Color',choices = columns, selected =  columns[1]))
+  output$xvar <- renderUI(selectInput('xvar',label='x Axis',choices = columns, selected =  columns[1]))
+  output$yvar <- renderUI(selectInput('yvar',label='y Axis',choices = columns, selected =  columns[2]))
+  output$cvar <- renderUI(selectInput('color',label='Color/Map',choices = columns, selected =  columns[1]))
+  #output$vvar <- renderUI(selectInput('vvar',label='Village',choices = columns, selected =  columns[1]))
   
   xvar_ <- ''
   xVar <- reactive({
@@ -69,11 +70,12 @@ function(input, output,session) {
     input$color})
   
   
+  
   ggvisdf <- reactive({
     print('ggvesdf1')
     df1 <- isolate(df@data)
-    gdf <- df1[, c(xVar(), yVar())]
-    names(gdf) <- c("x", "y")
+    gdf <- df1[, c(xVar(), yVar(), "Village")]
+    names(gdf) <- c("x", "y", "Village")
     gdf
   })  
   
@@ -102,7 +104,7 @@ function(input, output,session) {
     
   })
   
-
+  
   
   observe({
     print('legend')
@@ -125,41 +127,42 @@ function(input, output,session) {
       return(1)
     
     as.numeric(coords()[,1]>mb$west&coords()[,1]<mb$east&
-                       coords()[,2]>mb$south&coords()[,2]<mb$north)+0.1
+                 coords()[,2]>mb$south&coords()[,2]<mb$north)+0.1
     
   })
   
-
+  
   tooltip <- function(x) {
     ggvisHover <<- x
     if(is.null(x)) return(NULL)
-    tt<<-paste0(c(xVar(),yVar()), ": ", format(x[1:2]), collapse = "<br/>")
+    tt<<-paste0(c("Village", xVar(),yVar()),  ": ",c(format(x$Village), format(percent(x[1:2]))), collapse = "<br/>")
     leafletProxy('map') %>%addControl(tt,layerId = 'tt',position = 'bottomleft')
     tt
+    
   }
   
   
-
+  
   
   
   ggvisHover <- NULL
   makeReactiveBinding('ggvisHover')
   i.active <- NULL
   makeReactiveBinding('i.active')
-
+  
   
   observeEvent(ggvisHover,{
     h <- ggvisHover[1:2]
     i.active <<- ggvisdf()[,'x']==h[[1]]&ggvisdf()[,'y']==h[[2]]
   })
-
+  
   observeEvent(input$map_marker_mouseover,{
     id <- as.numeric(input$map_marker_mouseover$id)
     if(!is.na(id)){
       i.active <<- id
     }
   })
-
+  
   observeEvent(i.active,{
     leafletProxy('map') %>%
       # removeMarker('hover') %>%
@@ -172,19 +175,20 @@ function(input, output,session) {
   })
   
   mouseOver <- reactive({
-
-    p <- ggvisdf()[i.active,c('x','y')]
-    if(class(i.active)=='numeric'){tooltip(p)}
+    
+    p <- ggvisdf()[i.active,c('x','y', "Village")]
+    if(class(i.active)=='numeric')
+    {tooltip(p)}
     p
   })
   
-    
-
+  
+  
   
   ggvisdf %>% 
     ggvis(~x,~y) %>%
     set_options(width = "auto", height = "auto", resizable=FALSE) %>%    
-    # add_axis("x", title = xVar())  %>% 
+    add_axis("x", format = '%')  %>% 
     layer_points(size := input_slider(1, 100, value = 30,id='size',label = 'Size'),
                  opacity := mapData,
                  fill := pal) %>% 
@@ -196,6 +200,7 @@ function(input, output,session) {
     ggvis(~x) %>%
     set_options(width = "auto", height = "auto", resizable=FALSE) %>%    
     add_axis("y", title = '')  %>% 
+    add_axis("x",format = '%', ticks = 5, properties = axis_props(labels = list(angle = 45, align = "left", fontSize = 7))) %>%
     layer_densities(fill := '#000054') %>% 
     layer_points(data =mouseOver,stroke:='red',size := 10) %>%
     bind_shiny("p2")
@@ -204,11 +209,12 @@ function(input, output,session) {
     ggvis(~y) %>%
     layer_densities(fill := '#000054') %>% 
     set_options(width = "auto", height = "auto", resizable=FALSE) %>%    
-    add_axis("y", title = '')  %>% 
+    add_axis("y", title = "")  %>% 
+    add_axis("x",format = '%', ticks = 5, properties = axis_props(labels = list(angle = 45, align = "left", fontSize = 7))) %>%
     layer_points(data =mouseOver,stroke:='red',size := 10) %>%
     bind_shiny("p3")
   
-
+  
 }
 
 
