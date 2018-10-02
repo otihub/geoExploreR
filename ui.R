@@ -8,7 +8,9 @@
 
 
 shinyUI(
-  bootstrapPage(tags$head(includeScript("google-analytics.js")),
+  bootstrapPage(tags$head(
+   # includeScript("google-analytics.js")
+    ),
                 
   dashboardPage(#tags$head(includeScript()),
                 skin = 'green',

@@ -189,6 +189,7 @@ function(input, output,session) {
     ggvis(~x,~y) %>%
     set_options(width = "auto", height = "auto", resizable=FALSE) %>%    
     add_axis("x", format = '%')  %>% 
+    add_axis("y", format = '%', title_offset = 50)  %>% 
     layer_points(size := input_slider(1, 100, value = 30,id='size',label = 'Size'),
                  opacity := mapData,
                  fill := pal) %>% 
