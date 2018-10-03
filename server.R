@@ -110,7 +110,8 @@ function(input, output,session) {
     print('legend')
     leafletProxy("map")%>%
       clearControls() %>% 
-      addLegend(opacity = 0.99,position = "bottomright",title = colorVar(),
+      addLegend(opacity = 0.99,position = "bottomright",title = colorVar(), 
+                labFormat = labelFormat(suffix = '%', between = '%-', transform = function(x) 100 * x),
                 pal = colorpal(), values = rev(colorData()))
     
   })
