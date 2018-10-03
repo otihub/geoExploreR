@@ -13,6 +13,7 @@ shinyUI(
     ),
                 
   dashboardPage(#tags$head(includeScript()),
+    title="Diffa Perception Survey",
                 skin = 'green',
                 
                 
