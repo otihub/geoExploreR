@@ -51,10 +51,11 @@ datasets <- list(
 )
 
 baselayers <- list(
-  'Meuse'='DarkMatter (CartoDB)',
-  'Quakes'="Esri.OceanBasemap",
-  'Jura'='OpenStreetmap',
-  'Fulmar'='OpenStreetmap'
+#  'Meuse'='DarkMatter (CartoDB)',
+#  'Quakes'="Esri.OceanBasemap",
+#  'Jura'='OpenStreetmap',
+#  'Fulmar'='OpenStreetmap',
+  'Round 1'='Esri.OceanBasemap'
 )
 
 columns<- list(

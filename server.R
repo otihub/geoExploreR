@@ -17,11 +17,12 @@ function(input, output,session) {
   output$map <- renderLeaflet({
     print('render map')
     leaflet() %>% #addTiles() %>% 
-      addProviderTiles("Esri.OceanBasemap", group = "Esri.OceanBasemap") %>%
-      addProviderTiles("CartoDB.DarkMatter", group = "DarkMatter (CartoDB)") %>%
-      addProviderTiles("OpenStreetMap.Mapnik", group = "OpenStreetmap") %>%
-      addProviderTiles("Esri.WorldImagery", group = "Esri.WorldImagery") %>%
-      addLayersControl(baseGroups = c("OpenStreetmap","Esri.OceanBasemap",'DarkMatter (CartoDB)', 'Esri.WorldImagery'),
+      #addProviderTiles("Esri.OceanBasemap", group = "Esri.OceanBasemap") %>%
+      addProviderTiles("CartoDB.Positron", group = "Carto Positron") %>%
+      addProviderTiles("OpenStreetMap.HOT", group = "Humanitarian OSM") %>%
+      #addProviderTiles("OpenStreetMap.Mapnik", group = "OpenStreetmap") %>%
+      addProviderTiles("Esri.WorldImagery", group = "Esri WorldImagery") %>%
+      addLayersControl(baseGroups = c('Carto Positron',"Humanitarian OSM",  'Esri WorldImagery'),
                        options = layersControlOptions(collapsed = TRUE, autoZIndex = F))
   })
   
