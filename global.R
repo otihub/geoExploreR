@@ -10,7 +10,13 @@ require(gstat)
 require(rgdal)
 require(Cairo)
 library(formattable)
+library(googlesheets) 
 
+options(httr_oob_default=TRUE)
+gs_auth() 
+gs_ls()
+gdifr_1 <- gs_title("gdifr_1")
+difr1 <- data.frame(gdifr_1 %>%  gs_read(ws="Sheet1"))
 
 #data(meuse)
 #coordinates(meuse) = ~x+y
@@ -27,10 +33,12 @@ library(formattable)
 #coordinates(jura) <- ~x+y
 
 #Test$Date<-as.Date(Test$Date)
-difr1<-read.csv(file='diffa_r1.csv',sep = ',')
+
+#difr1<-read.csv(file='diffa_r1.csv',sep = ',')
 #test4<-test4[2:5]
 #test4$Date<-as.yearmon(test4$Date)
 #test4$Date<-as.Date(test4$Date)
+
 names(difr1)[18:19] <- c('y','x')
 difr1<-subset(difr1, y>0)
 difr1[is.na(difr1)]<-0
@@ -59,6 +67,8 @@ baselayers <- list(
 )
 
 columns<- list(
+  
+  "OTI Village"='OTI.Participant.YorN',
   "Most people in this group can be trusted?[People in your neighborhood]"="Trust.Neighbors",
   "Most people in this group can be trusted?[Traditional leaders]"="Trust.Trad.Leaders",
   "Most people in this group can be trusted?[Religious leaders]"="Trust.Rel.Leaders",
@@ -73,8 +83,7 @@ columns<- list(
   "Former Boko Haram/IS WA members should be allowed to return if they only did low-level jobs"="Returnif.Low.Level",
   "Former Boko Haram/IS WA members should be allowed to return if asked for forgiveness from the community"="Returnif.Ask.Forgiveness",   
   "Former Boko Haram/IS WA members should be allowed to return if they have been released from prison or completed the legal
-process"="Return.with.Legal.Process"  
-  
+process"="Return.with.Legal.Process"
 )
 
 
