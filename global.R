@@ -69,7 +69,7 @@ baselayers <- list(
 #  'Quakes'="Esri.OceanBasemap",
 #  'Jura'='OpenStreetmap',
 #  'Fulmar'='OpenStreetmap',
- 'Round 1'='Carto Positron'
+ 'Round 1'='Carto Positron' 
 )
 
 columns<- list(
