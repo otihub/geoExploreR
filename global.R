@@ -12,6 +12,11 @@ require(Cairo)
 library(formattable)
 library(googlesheets) 
 
+options(httr_oob_default=TRUE)
+gs_auth() 
+gs_ls()
+gdifr_1 <- gs_title("gdifr_1")
+difr1 <- data.frame(gdifr_1 %>%  gs_read(ws="Sheet1"))
 
 options(httr_oob_default=TRUE)
 gs_auth() 
